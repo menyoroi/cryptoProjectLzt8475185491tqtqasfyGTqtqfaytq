@@ -25,14 +25,15 @@ def index_page(request: HttpRequest):
         security_key = request.session.get('securityKey')
     for asset in assets:
         short_name = asset['short_name']
-        if short_name in tickers:
-            asset['price'] = tickers[short_name]['last']
-            asset['change'] = tickers[short_name]['percentage']
-            asset['change_status'] = 'up'
-            if '-' in str(asset['change']):
-                asset['change_status'] = 'down'
-                asset['change'] = abs(float(tickers[short_name]['percentage']))
-        else:
+        if tickers:
+            if short_name in tickers:
+                asset['price'] = tickers[short_name]['last']
+                asset['change'] = tickers[short_name]['percentage']
+                asset['change_status'] = 'up'
+                if '-' in str(asset['change']):
+                    asset['change_status'] = 'down'
+                    asset['change'] = abs(float(tickers[short_name]['percentage']))
+        if 'price' not in asset:
             asset['price'] = 0
             asset['change'] = 0
             asset['change_status'] = 'up'
