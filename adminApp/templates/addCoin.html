@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block styles%}
+    <link rel="stylesheet" href="{% static 'adminApp/css/styles-addCoin.css' %}?{% now 'U' %}">
+{% endblock %}
+
+{% block content%}
+    <div class="content">
+        <label>Add coin</label>
+        <input class="inp" type="text" name="coinName" placeholder="Coin name">
+        <input class="inp" type="text" name="coinShrtName" placeholder="Short coin name">
+        <div class="block__upload__img__coin">
+            <label for="input__file__coinImg">
+                <span class="preview__img__coin"></span>
+                <label>Выбрать файл</label>
+            </label>
+            <input type="file" id="input__file__coinImg" accept="image/png, image/jpeg" name="coinImg">
+        </div>
+        <span class="btn__add">Add</span>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{% static 'adminApp/js/scripts-addcoin.js' %}?{% now 'U' %}"></script>
+{% endblock %}

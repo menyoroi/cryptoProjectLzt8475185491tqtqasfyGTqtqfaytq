@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>BITLIST | Crypto Platform</title>
+    <meta name="dc.title" content="BITLIST | Crypto Platform">
+    <meta name="dc.description" content="Bitlist is your reliable guide in the world of digital assets.">
+    <meta name="dc.relation" content="https://127.0.0.1/">
+    <meta name="dc.source" content="https://127.0.0.1/">
+    <meta name="dc.language" content="eng_ENG">
+    <meta name="description" content="Bitlist is your reliable guide in the world of digital assets.">
+    <meta name="robots" content="index, follow">
+    <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+    <meta name="bingbot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+    <link rel="canonical" href="https://127.0.0.1/">
+    <meta property="og:url" content="https://127.0.0.1/">
+    <meta property="og:site_name" content="BITLIST">
+    <meta property="og:locale" content="eng_ENG">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="BITLIST | Crypto Platform">
+    <meta property="og:description" content="Bitlist is your reliable guide in the world of digital assets.">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="BITLIST | Crypto Platform">
+    <meta name="twitter:description" content="Bitlist is your reliable guide in the world of digital assets.">
+
+    <link rel="icon" type="image/png" href="{% static 'img/ico/ico bitlist.png' %}">
+    <link rel="stylesheet" href="{% static 'css/normalize.css' %}?{% now 'U' %}">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}?{% now 'U' %}">
+    <link rel="stylesheet" href="{% static 'css/index-styles.css' %}?{% now 'U' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+<div class="content">
+    <div class="window__auth" style="display: none">
+        <div class="form__auth__inner">
+            <img class="window__auth__ico__close" draggable="false" src="{% static 'img/ico/ico close.png' %}">
+            <label>Authorization</label>
+            <div class="form__auth__inputs">
+                <div class="input__block">
+                    <img draggable="false" src="{% static 'img/ico/mail ico.png' %}" class="input__ico">
+                    <input class="inp" value type="text" placeholder="Example@gmail.com" name="email">
+                </div>
+                <div class="input__block">
+                    <img draggable="false" src="{% static 'img/ico/mail ico.png' %}" class="input__ico">
+                    <input class="inp" value type="password" placeholder="Password" name="password">
+                </div>
+            </div>
+            <span class="btn login form">Log in</span>
+            <label class="window__auth__link reg">Registration</label>
+        </div>
+    </div>
+    <div class="header">
+        <div id="1" class="header__block">
+            <img draggable="false" src="{% static 'img/logo company/logo.png' %}" class="header__logo" alt="BITLIST">
+            <span class="header__split__line"></span>
+            <div class="input__block">
+                <img draggable="false" src="{% static 'img/ico/search ico.png' %}" class="input__ico">
+                <input class="inp" value type="text" placeholder="Search" name="search">
+            </div>
+        </div>
+        <div class="header__block">
+            <label class="main__btn">Trade</label>
+            <label class="main__btn">P2P</label>
+            <label class="main__btn">Partners</label>
+            <label class="main__btn">Mining</label>
+            <label class="main__btn">Academy</label>
+            <span class="header__split__line"></span>
+            {% if user == None %}
+            <div class="auth__btns">
+                <span class="btn register">Register</span>
+                <span class="btn login">Log in</span>
+            </div>
+            {% else %}
+            <label>Hi, {{user.email}}!</label>
+            {% endif %}
+        </div>
+        <span class="split__border"></span>
+    </div>
+    <div class="welcome__block">
+        <div class="welcome__label__and__register">
+            <span class="btn" id="mark">
+                <img src="{% static 'img/mark vector.png' %}" draggable="false">
+            </span>
+            <label class="welcome__label">Buy, trade and store cryptocurrencies</label>
+            <div class="welcome__form">
+                <div class="reg__form">
+                    <div class="input__block">
+                        <img draggable="false" src="{% static 'img/ico/mail ico.png' %}" class="input__ico">
+                        <input class="inp" value type="text" placeholder="Example@gmail.com" name="email">
+                    </div>
+                    <span class="btn login">Sign in</span>
+                </div>
+            </div>
+        </div>
+        <div class="bg__decoration">
+            <span class="circle__decoration c1"></span>
+            <img draggable="false" class="graphic__decoration" src="{% static 'img/graphic crypto.png'%}">
+            <span class="circle__decoration c2"></span>
+        </div>
+    </div>
+    <div class="assets__block">
+        <div class="assets_block__inner">
+            <table class="assets__table">
+                <thead>
+                    <tr>
+                        <th>Asset</th>
+                        <th>Price</th>
+                        <th>Change</th>
+                        <th>Volume</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for asset in assets %}
+                    {% if asset.visible == True%}
+                    <tr class="asset__info" id="{{asset.id}}">
+                        <td class="asset__img__name">
+                            <img class="asset__img" draggable="false" src="/static/img/ico coin/{{asset.img}}">
+                            <label class="asset__name">{{asset.name}}</label>
+                            <label class="asset__short_name">{{asset.short_name}}</label>
+                        </td>
+                        <td class="asset__price">$ {{asset.price}}</td>
+                        <td class="asset_change {{asset.change_status}}">{{asset.change}}%</td>
+                        <td class="asset_volume">2.000.000M</td>
+                        <td class="asset_action">
+                            <span class="btn__trade">Trade</span>
+                        </td>
+                    </tr>
+                    {% endif %}
+                    {% endfor %}
+                </tbody>
+            </table>
+            <span class="btn all_assets">All assets</span>
+        </div>
+    </div>
+    <div class="info__app__block">
+        <div class="info__label">
+            <label class="up__text">Bitlist is your reliable guide in the world of digital assets</label>
+            <label class="down__text">The Bitlist app is a comprehensive solution for trading digital assets. Buy and sell cryptocurrencies quickly and openly, comfortably and safely from anywhere in the world.</label>
+        </div>
+        <div class="logo__companies">
+            <img class="logo_company" src="{% static 'img/logo company/logo binance.png' %}" draggable="false">
+            <img class="logo_company" src="{% static 'img/logo company/bitfinex logo.png' %}" draggable="false">
+            <img class="logo_company" src="{% static 'img/logo company/kraken logo.png' %}" draggable="false">
+            <img class="logo_company" src="{% static 'img/logo company/bybit logo.png' %}" draggable="false">
+            <img class="logo_company" src="{% static 'img/logo company/crypto com logo.png' %}" draggable="false">
+            <img class="logo_company" src="{% static 'img/logo company/coinbase logo.png' %}" draggable="false">
+        </div>
+        <div class="bg__decoration">
+            <span class="circle__decoration c1"></span>
+            <span class="circle__decoration c2"></span>
+        </div>
+        <span class="split__border"></span>
+    </div>
+    <div class="privileges__app__block">
+        <div class="privileges__app__inner__block">
+            <div class="privilege__app">
+                <img class="privilege__ico" src="{% static 'img/ico privilege/safe asset ico.png' %}" draggable="false">
+                <label class="privilege__header">User Safe Asset Fund (SAFU)world.</label>
+                <label class="privilege__text">Bitlist holds 10% of all trading fees in a protected asset fund to protect a portion of user funds.</label>
+            </div>
+            <div class="privilege__app">
+                <img class="privilege__ico" src="{% static 'img/ico privilege/access control ico.png' %}" draggable="false">
+                <label class="privilege__header">User Access Control</label>
+                <label class="privilege__text">Personalized access control allows you to limit the devices and addresses that can access your account.</label>
+            </div>
+            <div class="privilege__app">
+                <img class="privilege__ico" src="{% static 'img/ico privilege/improved data ico.png' %}" draggable="false">
+                <label class="privilege__header">Improved data encryption</label>
+                <label class="privilege__text">Your transaction data is encrypted - only you can access your personal data.</label>
+            </div>
+            <div class="privilege__app">
+                <img class="privilege__ico" src="{% static 'img/ico privilege/support ico.png' %}" draggable="false">
+                <label class="privilege__header">Support 24/7</label>
+                <label class="privilege__text">24/7 real-time support is always ready to help you.</label>
+            </div>
+            <div class="privilege__app">
+                <img class="privilege__ico" src="{% static 'img/ico privilege/fast ico.png' %}" draggable="false">
+                <label class="privilege__header">Fast replineshments and withdraws</label>
+                <label class="privilege__text">Transfer funds to and from your accounts quickly and easily.</label>
+            </div>
+            <div class="privilege__app">
+                <img class="privilege__ico" src="{% static 'img/ico privilege/P2P ico.svg' %}" draggable="false">
+                <label class="privilege__header">Comfortable P2P platform</label>
+                <label class="privilege__text">Top up your account in any convenient way on the P2P platform at favorable rates.</label>
+            </div>
+        </div>
+        <span class="split__border"></span>
+    </div>
+    <div class="register__block">
+        <div class="register__block__inner">
+            <label class="register__text">Register your account now and start to trade</label>
+            <div class="reg__form">
+                <div class="input__block">
+                    <img draggable="false" src="{% static 'img/ico/mail ico.png' %}" class="input__ico">
+                    <input class="inp" value type="text" placeholder="Example@gmail.com" name="email">
+                </div>
+                <span class="btn login">Sign in</span>
+            </div>
+        </div>
+        <span class="split__border"></span>
+        <div class="bg__decoration">
+            <span class="rectangle_decorate"></span>
+        </div>
+    </div>
+    <div class="footer__block">
+        <div class="footer__block__inner">
+            <div class="footer__contacts__and__auth">
+                <img class="footer__logo__company" src="{% static 'img/logo company/logo 2.png'%}" draggable="false">
+                <div class="footer__contacts">
+                    <img class="footer__contact" src="{% static 'img/ico/tg ico.png' %}" draggable="false">
+                    <img class="footer__contact" src="{% static 'img/ico/facebook ico.png' %}" draggable="false">
+                    <img class="footer__contact" src="{% static 'img/ico/twitter ico.png' %}" draggable="false">
+                </div>
+                {% if user == None %}
+                <div class="auth__btns">
+                    <span class="btn register">Register</span>
+                    <span class="btn login">Log in</span>
+                </div>
+                {% endif %}
+            </div>
+            <div class="footer__main__btns">
+                <div class="footer__block__main__btns">
+                    <label class="main__btn">Trade</label>
+                    <label class="main__btn">P2P</label>
+                    <label class="main__btn">Partners</label>
+                    <label class="main__btn">Mining</label>
+                    <label class="main__btn">Academy</label>
+                </div>
+                <div class="footer__block__main__btns">
+                    <label class="main__btn">Privacy policy</label>
+                    <label class="main__btn">Terms of rules</label>
+                </div>
+
+            </div>
+        </div>
+        <label class="coopyright__text">Bitlist© All Rights Reserved</label>
+    </div>
+</div>
+<securitykey key="{{securityKey}}"></securitykey>
+</body>
+<script src="{% static 'js/scripts-index.js' %}?{% now 'U' %}"></script>
+</html>

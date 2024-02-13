@@ -1,0 +1,28 @@
+ html{
+     scroll-behavior: smooth;
+ }
+
+body{
+     margin: 0;
+     min-width: 100vw;
+     min-height: 100vh;
+     font-family: "Inter", sans-serif, Helvetica, Arial;
+     --radial-color: radial-gradient(circle, #26314E, #252B3D);
+     --radial-color-2: radial-gradient(circle, #66CBF9, #0FB5FF);
+     background: #08090B;
+     display: flex;
+     justify-content: center;
+     overflow-x: hidden;
+ }
+
+
+ input{
+     font-family: "Inter", sans-serif, Helvetica, Arial;
+ }
+
+ img{
+     user-select: none;
+     background-size: cover;
+     background-position: center;
+     background-repeat: no-repeat;
+ }

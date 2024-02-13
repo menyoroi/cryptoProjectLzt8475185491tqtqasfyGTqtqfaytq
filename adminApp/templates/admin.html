@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block styles%}
+    <link rel="stylesheet" href="{% static 'adminApp/css/styles-admin.css' %}?{% now 'U' %}">
+{% endblock %}
+
+{% block content%}
+    <div class="content">
+        <div class="users__manage">
+            <label>Manage Users</label>
+            {% for user in users %}
+            <div id="{{user.id}}" class="user">
+                <label class="user__email">{{user.email}}</label>
+                <label class="user__password">{{user.password}}</label>
+                <span class="btn delete">Delete</span>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="coin__manage">
+            <div class="header__manage">
+                <label>Manage Coins</label>
+                <div class="btn addCoin" onclick="window.location.href = window.location.href+'/addcoin'">Add coin</div>
+            </div>
+            {% for asset in assets %}
+            <div id="{{asset.id}}" class="coin">
+                <img draggable="false" src="/static/img/ico coin/{{asset.img}}" class="img img_coin">
+                <label class="name">{{asset.name}}</label>
+                <label class="short__name">{{asset.short_name}}</label>
+                <input type="checkbox" name="coin__visible" {% if asset.visible == True %}checked{% endif %}>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{% static 'adminApp/js/scripts-admin.js' %}?{% now 'U' %}"></script>
+{% endblock %}
